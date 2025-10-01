@@ -1,0 +1,38 @@
+import random
+import threading
+import time
+from datetime import datetime
+
+
+class ParmSensor:
+    def __init__(self, name):
+        self.name = name
+        self.temperature = 0
+        self.illuminance_or_light_intensity = 0
+        self.humidity = 0
+
+    def set_data(self):
+        self.temperature = random.randint(20, 30)
+        self.illuminance_or_light_intensity = random.randint(5000, 10000)
+        self.humidity = random.randint(40, 70)
+
+    def get_data(self):
+        return {
+            'temparature': self.temperature,
+            'illuminance or Light Intensity': self.illuminance_or_light_intensity,
+            'humidity': self.humidity
+        }
+
+
+def main():
+    sensors = [
+        ParmSensor('Parm1'),
+        ParmSensor('Parm2'),
+        ParmSensor('Parm3'),
+        ParmSensor('Parm4'),
+        ParmSensor('Parm5')
+    ]
+
+
+if __name__ == '__main__':
+    main()
