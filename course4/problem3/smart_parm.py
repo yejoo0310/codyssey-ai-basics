@@ -23,6 +23,15 @@ class ParmSensor:
             'humidity': self.humidity
         }
 
+    def thread_runner(self):
+        while True:
+            self.set_data()
+            data = self.get_data()
+            current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            print(
+                f"{current_time} — {self.name}, temp {data['temparature']}, light {data['illuminance or Light Intensity']}, humi {data['humidity']}")
+            time.sleep(10)
+
 
 def main():
     sensors = [
@@ -32,6 +41,13 @@ def main():
         ParmSensor('Parm4'),
         ParmSensor('Parm5')
     ]
+
+    for sensor in sensors:
+        thread = threading.Thread(target=sensor.thread_runner, daemon=True)
+        thread.start()
+
+    while True:
+        time.sleep(1)
 
 
 if __name__ == '__main__':
